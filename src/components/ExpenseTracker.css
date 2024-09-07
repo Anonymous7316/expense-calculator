@@ -1,0 +1,60 @@
+.ExpenseArea{
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.ExpenseCard{
+    background-color:#9B9B9B; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding:40px;
+    width:355.41px;
+    height:181px;
+    margin: 10px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.AddIncomeBtn{
+    color:#FFFFFF;
+    background-image: linear-gradient(to right,#B5DC52,#89E148);
+    border: none;
+    height: 38px;
+    width: 167.75px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 16px;
+    font-family: 'Ubuntu';
+    line-height: 18.38px;
+    padding: 10px;
+}
+.AddExpenseBtn{
+    color:#FFFFFF;
+    background-image: linear-gradient(to right,#FF9595,#FF4747,#FF3838);
+    border: none;
+    height: 38px;
+    width: 167.75px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 16px;
+    font-family: 'Ubuntu';
+    line-height: 18.38px;
+    padding: 10px;
+}
+p{
+    height: 34px;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 34.47px;
+}
+p>span{
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 34.47px;
+}
+.Income{
+    color: #9DFF5B;
+}
+.Expense{
+    color: #F4BB4A
+}

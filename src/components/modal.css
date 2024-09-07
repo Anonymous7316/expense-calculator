@@ -1,0 +1,29 @@
+input{
+    width: 250px;
+    height: 51px;
+    border: none;
+    border-radius: 15px;
+    padding-left: 10px;
+    font-weight: 400;
+    font-size: 16px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.AddExpBtn{
+    width: 262px;
+    height: 51px;
+    border: none;
+    border-radius: 15px;
+    background-color: #F4BB4A;
+    font-weight: 700;
+    font-size: 16px;
+    color: #FFFFFF;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.CancelBtn{
+    width: 112px;
+    height: 51px;
+    border: none;
+    border-radius: 15px;
+    background-color: #E3E3E3;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
