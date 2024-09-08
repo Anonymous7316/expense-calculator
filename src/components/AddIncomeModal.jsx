@@ -24,7 +24,7 @@ const AddExpense = ({showModal, setShowModal}) => {
         <div style={{display:'flex', justifyContent:'center', flexDirection:'column'}}>
           <h1>Add Balance</h1>
           <form action="" onSubmit={handleSubmit} style={{display:'flex', flexWrap:'wrap',gap:10}}>
-              <input placeholder='Income Amount' type="text" name='balance' style={{width:217}}/>
+              <input required placeholder='Income Amount' type="number" name='balance' style={{width:217}}/>
               <button className="AddBalanceBtn" type='submit'>Add Balance</button>
               <button className="CancelBtn" onClick={hideModalHandler}>Close</button>
           </form>
