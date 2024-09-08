@@ -44,7 +44,7 @@ function PieRechartComponent ({data}) {
                   border: "1px solid black"
                }}
             >
-               <label>{`${payload[0].name} : ${payload[0].value}%`}</label>
+               <label>{`${payload[0].name} : ₹${payload[0].value}`}</label>
             </div>
          );
       }
