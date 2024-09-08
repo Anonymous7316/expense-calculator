@@ -1,4 +1,4 @@
-import React, { memo, useState, useContext } from "react";
+import React, { memo, useState, useContext, useEffect } from "react";
 import { TiDeleteOutline } from "react-icons/ti";
 import { MdOutlineEdit } from "react-icons/md";
 import { IoFastFoodOutline } from "react-icons/io5";
@@ -8,51 +8,31 @@ import { GrLinkPrevious } from "react-icons/gr";
 import { GrLinkNext } from "react-icons/gr";
 import './RecentTransaction.css';
 import { ModalContext } from "../App";
+import { expenseContext } from "../App";
 
-const data = [
-    {
-        id:1,
-        type:'Food',
-        expense:150,
-        date:'March 20, 2024',
-        expenseOn:'Samosa',
-    },
-    {
-        id:2,
-        type:'Entertainment',
-        expense:300,
-        date:'March 21, 2024',
-        expenseOn:'Movie',
-    },
-    {
-        id:3,
-        type:'Travel',
-        expense:50,
-        date:'March 22, 2024',
-        expenseOn:'Auto',
-    },
-    {
-        id:4,
-        type:'Travel',
-        expense:50,
-        date:'March 22, 2024',
-        expenseOn:'Auto',
-    }
-];
-
-function RecentTransaction(){
-    const [transactions,setTransactions] = useState(data);
+function RecentTransaction({setSelectedID}){
+    const [transactions,setTransactions] = useState([]);
     const {showModal, setShowModal, setModalTitle} = useContext(ModalContext);
+    const {expense,setExpense} = useContext(expenseContext);
+
+    useEffect(()=>{
+        setTransactions(JSON.parse(localStorage.getItem('expense')).data);
+    },[expense]);
+
     const handleEdit = (e,id) =>{
         e.stopPropagation();
-        console.log(id);
+        setSelectedID(id);
         setModalTitle("Edit Expense");
         setShowModal(true);
     };
     const handleDelete = (e,id) =>{
         e.stopPropagation();
-        setTransactions((prevState)=>prevState.filter((transaction)=>transaction.id!==id));
-        console.log(id);
+        let currentExpenseValue = parseInt(transactions.find((transaction)=>transaction.id===id).expense);
+        let newTotalBalance = parseInt(expense.balance) + parseInt(currentExpenseValue);
+        let newTotalExpense = parseInt(expense.expense) - parseInt(currentExpenseValue);
+        let newTransactionList = transactions.filter((transaction)=>transaction.id!==id);
+        localStorage.setItem('expense',JSON.stringify({balance:newTotalBalance.toString(),expense:newTotalExpense.toString(),data:newTransactionList}));
+        setExpense({balance:newTotalBalance.toString(),expense:newTotalExpense.toString(),data:newTransactionList});
     };
 
     return(

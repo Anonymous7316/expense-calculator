@@ -2,27 +2,36 @@ import React, { memo, useContext } from "react";
 import PieChartGraph from "./PieChart";
 import './ExpenseTracker.css';
 import { ModalContext } from "../App";
+import { AddBalanceModalContext } from "../App";
+import { expenseContext } from "../App";
 
-function ExpenseTracker(){
+function ExpenseTracker({chartData}){
     const {showModal, setShowModal, setModalTitle} = useContext(ModalContext);
+    const {showAddBalanceModal, setShowAddBalanceModal} = useContext(AddBalanceModalContext);
+    const {expense,setExpense} = useContext(expenseContext);
+
     const handleAddExpense = () =>{
         setModalTitle("Add Expense");
         setShowModal(true);
-    }
+    };
+    
+    const handleAddBalance = () =>{
+        setShowAddBalanceModal(true);
+    };
 
     return(
         <>
             <div className="ExpenseArea" style={{display:'flex', justifyContent:'space-around', alignItems:'center',padding:'50px',backgroundColor:'#626262', flexWrap:'wrap'}}>
                 <div className="ExpenseCard">
-                    <p>Wallet Balance: <span className="Income">₹4500</span></p>
-                    <button className="AddIncomeBtn">+ Add Income</button>
+                    <p>Wallet Balance: <span className="Income">₹{expense.balance}</span></p>
+                    <button className="AddIncomeBtn" onClick={handleAddBalance}>+ Add Income</button>
                 </div>
                 <div className="ExpenseCard">
-                    <p>Expense: <span className="Expense">₹500</span></p>
+                    <p>Expense: <span className="Expense">₹{expense.expense}</span></p>
                     <button className="AddExpenseBtn" onClick={handleAddExpense}>+ Add Expense</button>
                 </div>
                 <div>
-                    <PieChartGraph/>
+                    <PieChartGraph data={chartData}/>
                 </div>
             </div>
         </>
