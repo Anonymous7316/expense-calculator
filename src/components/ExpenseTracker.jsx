@@ -6,9 +6,9 @@ import { AddBalanceModalContext } from "../App";
 import { expenseContext } from "../App";
 
 function ExpenseTracker({chartData}){
-    const {showModal, setShowModal, setModalTitle} = useContext(ModalContext);
-    const {showAddBalanceModal, setShowAddBalanceModal} = useContext(AddBalanceModalContext);
-    const {expense,setExpense} = useContext(expenseContext);
+    const {setShowModal, setModalTitle} = useContext(ModalContext);
+    const {setShowAddBalanceModal} = useContext(AddBalanceModalContext);
+    const {expense} = useContext(expenseContext);
 
     const handleAddExpense = () =>{
         setModalTitle("Add Expense");

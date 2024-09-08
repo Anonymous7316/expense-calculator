@@ -1,5 +1,3 @@
-import React, {useContext, useEffect} from "react";
-
 import {
   ComposedChart,
   Bar,
@@ -7,21 +5,6 @@ import {
   YAxis,
   Tooltip,
 } from "recharts";
-
-// const data = [
-//   {
-//     name: "Entertainment",
-//     amt: 1400,
-//   },
-//   {
-//     name: "Food",
-//     amt: 1000,
-//   },
-//   {
-//     name: "Travel",
-//     amt: 989,
-//   },
-// ];
 
 export default function App({data}) {
   return (

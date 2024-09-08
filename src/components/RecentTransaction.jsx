@@ -12,7 +12,7 @@ import { expenseContext } from "../App";
 
 function RecentTransaction({setSelectedID}){
     const [transactions,setTransactions] = useState([]);
-    const {showModal, setShowModal, setModalTitle} = useContext(ModalContext);
+    const {setShowModal, setModalTitle} = useContext(ModalContext);
     const {expense,setExpense} = useContext(expenseContext);
 
     useEffect(()=>{

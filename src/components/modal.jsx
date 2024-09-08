@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import ReactModal from 'react-modal';
 import './modal.css';
 import { expenseContext } from "../App";
 import { useSnackbar } from 'notistack'
 
 const AddExpense = ({showModal, setShowModal,modalTitle,selectedID}) => {
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar()
+  const { enqueueSnackbar} = useSnackbar()
   const {expense,setExpense} = useContext(expenseContext);
   const hideModalHandler = () => setShowModal(false);
   

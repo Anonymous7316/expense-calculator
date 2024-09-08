@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import ReactModal from 'react-modal';
 import './AddIncomeModal.css';
 import { expenseContext } from "../App";

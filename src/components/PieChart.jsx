@@ -1,24 +1,9 @@
-import React, { useEffect, useState, useContext } from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
 
 
 function PieRechartComponent ({data}) {
    const COLORS = ["#A000FF","#FF9304","#FDE006"];
-   // const pieData = [
-   //      {
-   //          name: "Food",
-   //          value: 1400
-   //      },
-   //      {
-   //          name: "Entertainment",
-   //          value: 1000
-   //      },
-   //      {
-   //          name: "Travel",
-   //          value: 989
-   //      },
-   // ];
 
    const RADIAN = Math.PI / 180;
    const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
