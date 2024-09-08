@@ -73,15 +73,17 @@ function App() {
   },[]);
 
   useEffect(()=>{
-    let graphData = Object.groupBy(expense.data,({type})=>type);
-    let finalExpense = Object.keys(graphData).map((type)=>{
-    let amt = 0;
-    graphData[type].forEach(expense => {
-      amt += parseInt(expense.expense);
+    if(expense.data){
+      let graphData = Object.groupBy(expense.data,({type})=>type);
+      let finalExpense = Object.keys(graphData).map((type)=>{
+      let amt = 0;
+      graphData[type].forEach(expense => {
+        amt += parseInt(expense.expense);
+        });
+        return {name:type,amt,value:amt};
       });
-      return {name:type,amt,value:amt};
-    });
-    setChartData(finalExpense);
+      setChartData(finalExpense);
+    }
   },[expense]);
 
   return (
