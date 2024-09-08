@@ -7,37 +7,6 @@ import Modal from './components/modal';
 import AddBalanceModal from './components/AddIncomeModal';
 import { SnackbarProvider} from 'notistack'
 
-// const data = [
-//   {
-//       id:1,
-//       type:'Food',
-//       expense:150,
-//       date:'March 20, 2024',
-//       expenseOn:'Samosa',
-//   },
-//   {
-//       id:2,
-//       type:'Entertainment',
-//       expense:300,
-//       date:'March 21, 2024',
-//       expenseOn:'Movie',
-//   },
-//   {
-//       id:3,
-//       type:'Travel',
-//       expense:50,
-//       date:'March 22, 2024',
-//       expenseOn:'Auto',
-//   },
-//   {
-//       id:4,
-//       type:'Travel',
-//       expense:50,
-//       date:'March 22, 2024',
-//       expenseOn:'Auto',
-//   }
-// ];
-
 export const ModalContext = createContext();
 export const AddBalanceModalContext = createContext();
 export const expenseContext = createContext();
