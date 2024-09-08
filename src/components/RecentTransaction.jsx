@@ -39,7 +39,7 @@ function RecentTransaction({setSelectedID}){
         <div style={{margin:10, padding:20, display:'flex', justifyContent:'space-between', flexDirection:'column',height:'92%'}}>
             {
                 transactions.length?
-            <div>
+            <div style={{overflow:'auto', padding:10}}>
                 {transactions.map((transaction)=>{
                     return(
                         <div key={transaction.id} style={{color:'black', display:'flex', justifyContent:'space-between', borderBottom:'1px solid #9B9B9B'}}>
@@ -58,7 +58,7 @@ function RecentTransaction({setSelectedID}){
                             </div>
                         </div>
                     )
-                }).splice(0,3)}
+                })}
             </div>
             :
             <div style={{color:'#9B9B9B', display:'flex', justifyContent:'center', alignItems:'center', height:'100%'}}>

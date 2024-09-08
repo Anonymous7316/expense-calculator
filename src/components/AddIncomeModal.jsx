@@ -12,7 +12,7 @@ const AddExpense = ({showModal, setShowModal}) => {
     const formData = Object.fromEntries(new FormData(e.target).entries());
     console.log(formData);
     localStorage.setItem('expense',JSON.stringify({balance:(parseInt(expense.balance)+ parseInt(formData.balance)).toString(),expense:expense.expense,data:expense.data}));
-    setExpense({expense:expense.expense, balance:(parseInt(expense.balance)+ parseInt(formData.balance)).toString()});
+    setExpense({balance:(parseInt(expense.balance)+ parseInt(formData.balance)).toString(),expense:expense.expense,data:expense.data});
     setShowModal(false);
   }
 

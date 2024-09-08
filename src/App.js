@@ -5,7 +5,7 @@ import BarChart from './components/BarChart';
 import RecentTransaction from './components/RecentTransaction';
 import Modal from './components/modal';
 import AddBalanceModal from './components/AddIncomeModal';
-import { type } from '@testing-library/user-event/dist/type';
+import { SnackbarProvider} from 'notistack'
 
 // const data = [
 //   {
@@ -88,32 +88,34 @@ function App() {
 
   return (
     <div className="App">
-      <expenseContext.Provider value={{expense,setExpense}}>
-        <ModalContext.Provider value={{showModal, setShowModal, setModalTitle}}>
-          <AddBalanceModalContext.Provider value={{showAddBalanceModal, setShowAddBalanceModal}}>
-          <div className='expense'>
-            <h1>Expense Tracker</h1>
-            <ExpenseTracker chartData={chartData}/>
-          </div>
-          <div className='transactions'>
-            <div style={{width:'65%'}}>
-              <h1><i>Recent Transactions</i></h1>
-              <div className='transactionCard' style={{ height:345, backgroundColor:'white'}}>
-                <RecentTransaction setSelectedID={setSelectedID}/>
+      <SnackbarProvider>
+        <expenseContext.Provider value={{expense,setExpense}}>
+          <ModalContext.Provider value={{showModal, setShowModal, setModalTitle}}>
+            <AddBalanceModalContext.Provider value={{showAddBalanceModal, setShowAddBalanceModal}}>
+            <div className='expense'>
+              <h1>Expense Tracker</h1>
+              <ExpenseTracker chartData={chartData}/>
+            </div>
+            <div className='transactions'>
+              <div style={{width:'65%'}}>
+                <h1><i>Recent Transactions</i></h1>
+                <div className='transactionCard' style={{ height:345, backgroundColor:'white'}}>
+                  <RecentTransaction setSelectedID={setSelectedID}/>
+                </div>
+              </div>
+              <div>
+                <h1><i>Top Expenses </i></h1>
+                <div className='transactionCard' style={{width:417, height:345, backgroundColor:'white', display:'flex', justifyContent:'center',alignItems:'center'}}>
+                  <BarChart data={chartData}/>
+                </div>
               </div>
             </div>
-            <div>
-              <h1><i>Top Expenses </i></h1>
-              <div className='transactionCard' style={{width:417, height:345, backgroundColor:'white', display:'flex', justifyContent:'center',alignItems:'center'}}>
-                <BarChart data={chartData}/>
-              </div>
-            </div>
-          </div>
-          </AddBalanceModalContext.Provider>
-        </ModalContext.Provider>
-        <Modal showModal={showModal} setShowModal={setShowModal} modalTitle={modalTitle} selectedID={selectedID} />
-        <AddBalanceModal showModal={showAddBalanceModal} setShowModal={setShowAddBalanceModal}/>
-      </expenseContext.Provider>
+            </AddBalanceModalContext.Provider>
+          </ModalContext.Provider>
+          <Modal showModal={showModal} setShowModal={setShowModal} modalTitle={modalTitle} selectedID={selectedID} />
+          <AddBalanceModal showModal={showAddBalanceModal} setShowModal={setShowAddBalanceModal}/>
+        </expenseContext.Provider>
+      </SnackbarProvider>
     </div>
   );
 }

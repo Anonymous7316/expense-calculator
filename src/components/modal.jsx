@@ -2,8 +2,10 @@ import React, { useState, useContext } from 'react';
 import ReactModal from 'react-modal';
 import './modal.css';
 import { expenseContext } from "../App";
+import { useSnackbar } from 'notistack'
 
 const AddExpense = ({showModal, setShowModal,modalTitle,selectedID}) => {
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar()
   const {expense,setExpense} = useContext(expenseContext);
   const hideModalHandler = () => setShowModal(false);
   
@@ -16,16 +18,21 @@ const AddExpense = ({showModal, setShowModal,modalTitle,selectedID}) => {
       formData.date = [date[1], date[2]+',', date[3]].join(' ');
       let currentExpenseValue = parseInt(expense.data.find((transaction)=>transaction.id===selectedID).expense);
       let newTotalBalance = parseInt(expense.balance) + parseInt(currentExpenseValue) - parseInt(formData.expense);
-      let newTotalExpense = parseInt(expense.expense) - parseInt(currentExpenseValue) + parseInt(formData.expense);
-      let newTransactionList = expense.data.map((transaction)=>{
-        if(transaction.id===parseInt(selectedID)){
-            return {...formData,id:transaction.id};
-        }
-        return transaction;
-      });
-      localStorage.setItem('expense',JSON.stringify({balance:newTotalBalance.toString(),expense:newTotalExpense.toString(),data:newTransactionList}));
-      setExpense({balance:newTotalBalance.toString(),expense:newTotalExpense.toString(),data:newTransactionList});
-      setShowModal(false);
+      if(newTotalBalance<0){
+        enqueueSnackbar("You can't spend more than you balance!",{anchorOrigin:{ horizontal: 'top', vertical: 'right' }, variant:'error'});
+      }
+      else{
+        let newTotalExpense = parseInt(expense.expense) - parseInt(currentExpenseValue) + parseInt(formData.expense);
+        let newTransactionList = expense.data.map((transaction)=>{
+          if(transaction.id===parseInt(selectedID)){
+              return {...formData,id:transaction.id};
+          }
+          return transaction;
+        });
+        localStorage.setItem('expense',JSON.stringify({balance:newTotalBalance.toString(),expense:newTotalExpense.toString(),data:newTransactionList}));
+        setExpense({balance:newTotalBalance.toString(),expense:newTotalExpense.toString(),data:newTransactionList});
+        setShowModal(false);
+      }
     }
     else{
       let date = new Date(formData.date).toString().split(' ');
@@ -33,14 +40,18 @@ const AddExpense = ({showModal, setShowModal,modalTitle,selectedID}) => {
       formData.id = expense.data.length + 1;
       let currentExpenseValue = parseInt(formData.expense);
       let newTotalBalance = parseInt(expense.balance) - parseInt(currentExpenseValue);
-      let newTotalExpense = parseInt(expense.expense) + parseInt(currentExpenseValue);
-      let newTransactionList = JSON.parse(JSON.stringify(expense.data));
-      newTransactionList.unshift(formData);
-      localStorage.setItem('expense',JSON.stringify({balance:newTotalBalance.toString(),expense:newTotalExpense.toString(),data:newTransactionList}));
-      setExpense({balance:newTotalBalance.toString(),expense:newTotalExpense.toString(),data:newTransactionList});
-      setShowModal(false);
+      if(newTotalBalance<0){
+        enqueueSnackbar("You can't spend more than you balance!",{anchorOrigin:{ horizontal: 'top', vertical: 'right' }, variant:'error'});
+      }
+      else{
+        let newTotalExpense = parseInt(expense.expense) + parseInt(currentExpenseValue);
+        let newTransactionList = JSON.parse(JSON.stringify(expense.data));
+        newTransactionList.unshift(formData);
+        localStorage.setItem('expense',JSON.stringify({balance:newTotalBalance.toString(),expense:newTotalExpense.toString(),data:newTransactionList}));
+        setExpense({balance:newTotalBalance.toString(),expense:newTotalExpense.toString(),data:newTransactionList});
+        setShowModal(false);
+      }
     }
-
   }
   return (
     <div>
@@ -50,14 +61,14 @@ const AddExpense = ({showModal, setShowModal,modalTitle,selectedID}) => {
         <div style={{display:'flex', justifyContent:'center', flexDirection:'column'}}>
           <h1>{modalTitle}</h1>
           <form action="" onSubmit={handleSubmit} style={{display:'flex', flexWrap:'wrap',gap:10}}>
-              <input placeholder="Title" type="text" name='expenseOn'/>
-              <input placeholder='Price' type="number" name='expense'/>
-              <select name='type' placeholder="Select Category" id="category">
+              <input required placeholder="Title" type="text" name='expenseOn'/>
+              <input required placeholder='Price' type="number" name='expense'/>
+              <select required name='type' placeholder="Select Category" id="category">
                   <option value="Entertainment">Entertainment</option>
                   <option value="Travel">Travel</option>
                   <option value="Food">Food</option>
               </select>
-              <input placeholder="dd/mm/yyyy" id="date" type="date" name='date'/>
+              <input required placeholder="dd/mm/yyyy" id="date" type="date" name='date'/>
               <div style={{display:'flex', flexWrap:'wrap',gap:10}}>
                 <button className="AddExpBtn" type='submit'>Add Expense</button>
                 <button className="CancelBtn" onClick={hideModalHandler}>Close</button>
