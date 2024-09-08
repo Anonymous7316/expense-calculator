@@ -19,7 +19,7 @@ const AddExpense = ({showModal, setShowModal,modalTitle,selectedID}) => {
       let currentExpenseValue = parseInt(expense.data.find((transaction)=>transaction.id===selectedID).expense);
       let newTotalBalance = parseInt(expense.balance) + parseInt(currentExpenseValue) - parseInt(formData.expense);
       if(newTotalBalance<0){
-        enqueueSnackbar("You can't spend more than you balance!",{anchorOrigin:{ horizontal: 'top', vertical: 'right' }, variant:'error'});
+        enqueueSnackbar("You can't spend more than your balance!",{anchorOrigin:{ horizontal: 'top', vertical: 'right' }, variant:'error'});
       }
       else{
         let newTotalExpense = parseInt(expense.expense) - parseInt(currentExpenseValue) + parseInt(formData.expense);
@@ -41,7 +41,7 @@ const AddExpense = ({showModal, setShowModal,modalTitle,selectedID}) => {
       let currentExpenseValue = parseInt(formData.expense);
       let newTotalBalance = parseInt(expense.balance) - parseInt(currentExpenseValue);
       if(newTotalBalance<0){
-        enqueueSnackbar("You can't spend more than you balance!",{anchorOrigin:{ horizontal: 'top', vertical: 'right' }, variant:'error'});
+        enqueueSnackbar("You can't spend more than your balance!",{anchorOrigin:{ horizontal: 'top', vertical: 'right' }, variant:'error'});
       }
       else{
         let newTotalExpense = parseInt(expense.expense) + parseInt(currentExpenseValue);
